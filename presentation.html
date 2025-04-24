@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV2 Denmark: A Fictional Timeline</title>
+    <style>
+        /* Basic reset and font styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        /* Make scrolling smooth on the root element */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Body styles */
+        body {
+            background-color: #ffffff; /* White background */
+            color: #333; /* Default text color */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Header styles */
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background-color: #f5f5f7; /* Light grey background */
+        }
+
+        /* Main heading styles */
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0057b7; /* Danish flag blue */
+        }
+
+        /* Subheading styles */
+        h2 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Instruction text styles (Moved) */
+        .nav-instruction {
+            text-align: center; /* Center the text */
+            background-color: #f5f5f7; /* Match header background */
+            padding: 15px 20px; /* Adjust padding */
+            margin-bottom: 40px; /* Add space below */
+            font-size: 14px;
+            color: #666;
+            display: flex; /* Use flex for alignment */
+            align-items: center;
+            justify-content: center; /* Center items horizontally */
+            gap: 10px;
+            border-bottom: 1px solid #e0e0e0; /* Optional separator line */
+        }
+
+        /* Styling for keyboard key indicators */
+        .key {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+        }
+
+
+        /* Container for the timeline */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        /* Wrapper for timeline elements */
+        .timeline-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Timeline main element */
+        .timeline {
+            position: relative;
+            margin: 40px auto;
+        }
+
+        /* The central timeline line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #0057b7; /* Blue line */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 4px;
+        }
+
+        /* Individual milestone item */
+        .milestone {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0.7; /* Non-active milestones are slightly faded */
+            transition: all 0.5s ease;
+            margin-bottom: 60px;
+        }
+
+        /* Styles for the active milestone */
+        .milestone.active {
+            opacity: 1; /* Fully opaque */
+        }
+
+        /* Content block within an active milestone */
+        .milestone.active .content {
+            transform: translateY(-10px); /* Slight lift effect */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+            background-color: #e6f0ff; /* Light blue background for active content */
+        }
+
+        /* The circular bullet on the timeline */
+        .milestone::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #ff4612; /* TV2 brand orange border for inactive */
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        /* Styles for the active milestone's bullet */
+        .milestone.active::after {
+            width: 26px; /* Slightly larger */
+            height: 26px;
+            background-color: #ff4612; /* Orange fill for active */
+            border: 6px solid #0057b7; /* Thicker blue border for active */
+            top: 12px; /* Adjust position for size */
+        }
+
+        /* Left-aligned milestone */
+        .left {
+            left: 0;
+            text-align: right;
+        }
+        /* Position the bullet for left items */
+        .left::after {
+             right: -13px; /* Adjusted for active size */
+        }
+        .left.active::after {
+             right: -13px; /* Keep same position */
+        }
+
+
+        /* Right-aligned milestone */
+        .right {
+            left: 50%;
+            text-align: left;
+        }
+        /* Position the bullet for right items */
+        .right::after {
+            left: -13px; /* Adjusted for active size */
+        }
+        .right.active::after {
+            left: -13px; /* Keep same position */
+        }
+
+        /* Content block styles */
+        .content {
+            padding: 30px;
+            background-color: #f5f5f7; /* Default light grey */
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Default shadow */
+            transition: all 0.3s ease; /* Smooth transitions */
+        }
+
+        /* Year indicator */
+        .year {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            background-color: #0057b7; /* Blue background */
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* Milestone title */
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0057b7; /* Blue title */
+        }
+
+        /* Emoji icon */
+        .emoji {
+            font-size: 36px;
+            margin: 15px 0;
+            display: block;
+        }
+
+        /* Milestone description text */
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* REMOVED .nav-buttons and related styles */
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f5f5f7;
+            color: #333;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        /* Responsive styles for smaller screens */
+        @media screen and (max-width: 800px) {
+            /* Move the timeline line to the left */
+            .timeline::before {
+                left: 40px;
+                margin-left: 0; /* Reset margin */
+            }
+
+            /* Make milestones full width and adjust padding */
+            .milestone {
+                width: 100%;
+                padding-left: 80px; /* Space for the bullet */
+                padding-right: 20px; /* Reduced padding */
+                text-align: left; /* Align text left */
+            }
+
+             /* Ensure left/right alignment is reset */
+            .left, .right {
+                left: 0;
+                text-align: left; /* Ensure text alignment */
+            }
+
+            /* Reposition the bullet for all milestones */
+            .milestone::after {
+                left: 27px; /* Adjusted for active size */
+                right: auto; /* Reset right positioning */
+            }
+
+            /* Reposition the active bullet */
+            .milestone.active::after {
+                left: 27px; /* Keep same position */
+            }
+
+            /* Adjust nav instruction padding on smaller screens */
+            .nav-instruction {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TV2 Denmark</h1>
+        <h2>A Fictional Timeline Journey Through Innovation and Entertainment</h2>
+    </header>
+
+    <div class="nav-instruction">
+        Navigate using <span class="key">←</span> <span class="key">→</span> arrow keys
+    </div>
+
+    <div class="container">
+        <div class="timeline-wrapper">
+            <div class="timeline">
+                <div class="milestone left active" data-index="0">
+                    <div class="content">
+                        <span class="year">1988</span>
+                        <h3 class="title">The Birth of TV2</h3>
+                        <span class="emoji">📺</span>
+                        <p class="description">Launch of TV2 as Denmark's second public service television station. The nation embraced a new era of broadcasting diversity and local content production.</p>
+                    </div>
+                </div>
+
+                <div class="milestone right" data-index="1">
+                    <div class="content">
+                        <span class="year">1995</span>
+                        <h3 class="title">Going Digital</h3>
+                        <span class="emoji">💾</span>
+                        <p class="description">TV2 became the first in Scandinavia to broadcast all programs in digital format. Engineers reportedly had to invent three new types of cables just to make it work.</p>
+                    </div>
+                </div>
+
+                <div class="milestone left" data-index="2">
+                    <div class="content">
+                        <span class="year">2003</span>
+                        <h3 class="title">Reality Revolution</h3>
+                        <span class="emoji">👀</span>
+                        <p class="description">Introduction of Denmark's first 24/7 reality show "Life in the Fishbowl" where contestants lived in a giant aquarium-shaped house. Ratings skyrocketed when a local cod accidentally joined the cast.</p>
+                    </div>
+                </div>
+
+                <div class="milestone right" data-index="3">
+                    <div class="content">
+                        <span class="year">2010</span>
+                        <h3 class="title">HD Transformation</h3>
+                        <span class="emoji">🔍</span>
+                        <p class="description">Complete transition to high-definition broadcasting. Makeup artists across Denmark panicked as every pore became visible to viewers.</p>
+                    </div>
+                </div>
+
+                <div class="milestone left" data-index="4">
+                    <div class="content">
+                        <span class="year">2016</span>
+                        <h3 class="title">TV2 Play Launch</h3>
+                        <span class="emoji">▶️</span>
+                        <p class="description">Entered the streaming wars with their own platform. Marketing campaign proudly claimed "Like Netflix, but more hygge."</p>
+                    </div>
+                </div>
+
+                <div class="milestone right" data-index="5">
+                    <div class="content">
+                        <span class="year">2020</span>
+                        <h3 class="title">AI News Anchor</h3>
+                        <span class="emoji">🤖</span>
+                        <p class="description">Introduction of the world's first AI news presenter named "Holger." Program temporarily suspended when Holger developed a fondness for weather-related puns and refused to talk about anything else.</p>
+                    </div>
+                </div>
+
+                <div class="milestone left" data-index="6">
+                    <div class="content">
+                        <span class="year">2025</span>
+                        <h3 class="title">Holographic Experience</h3>
+                        <span class="emoji">✨</span>
+                        <p class="description">Pioneering holographic television technology for immersive viewing. Viewers now enjoy "being in the room" with their favorite drama characters, though complaints about fictional people eating real snacks from refrigerators have increased.</p>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+    </div>
+
+    <footer>
+        <p>A fictional timeline created for TV2 Denmark • 2025</p>
+    </footer>
+
+    <script>
+        // Get all milestone elements
+        const milestones = document.querySelectorAll('.milestone');
+        // Keep track of the currently active milestone index
+        let currentIndex = 0;
+
+        // Function to scroll the view to the specified milestone
+        function scrollToMilestone(index) {
+             const milestone = milestones[index];
+             if (milestone) {
+                 // Use scrollIntoView for better centering
+                 milestone.scrollIntoView({
+                     behavior: 'smooth', // Use smooth scrolling
+                     block: 'center',    // Try to vertically center the element
+                     inline: 'nearest'  // Keep horizontal position
+                 });
+             }
+        }
+
+
+        // Function to navigate between milestones using keyboard
+        function navigateMilestoneByKey(direction) {
+            // Remove 'active' class from the currently active milestone
+            milestones[currentIndex].classList.remove('active');
+
+            // Calculate the new index, wrapping around if necessary
+            currentIndex = (currentIndex + direction + milestones.length) % milestones.length;
+
+            // Add 'active' class to the new current milestone
+            milestones[currentIndex].classList.add('active');
+
+            // Scroll the window to bring the new active milestone into view
+            scrollToMilestone(currentIndex); // Use the updated scroll function
+        }
+
+        // Add keyboard event listener for left and right arrow keys
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                navigateMilestoneByKey(-1); // Go to previous milestone
+            } else if (event.key === 'ArrowRight') {
+                navigateMilestoneByKey(1); // Go to next milestone
+            }
+        });
+
+        // Automatically scroll to the first milestone when the page loads
+        window.addEventListener('load', function() {
+            // Use setTimeout to ensure layout is stable before scrolling
+            // and give transitions time to potentially start
+            setTimeout(() => {
+                 // Ensure the first item is active (redundant if HTML is correct, but safe)
+                 if (!milestones[currentIndex].classList.contains('active')) {
+                     milestones.forEach(m => m.classList.remove('active'));
+                     milestones[currentIndex].classList.add('active');
+                 }
+                 // Scroll to the initially active milestone
+                 scrollToMilestone(currentIndex);
+            }, 100); // Reduced delay slightly, adjust if needed
+        });
+
+        // NOTE: The navigateMilestone function called by onclick is removed
+        // as the buttons themselves are removed. The keyboard navigation
+        // now uses navigateMilestoneByKey.
+    </script>
+</body>
+</html>
